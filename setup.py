@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='series_alignment',
-      version='0.0.2',
+      version='1.0.0',
       description='Tool for aligning two series visually',
       url='http://github.com/brian-murphy/series_alignment',
       author='Brian Murphy',

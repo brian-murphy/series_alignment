@@ -17,10 +17,10 @@ class NavBarPatcher:
     """Monkey patch to make sure the Navigation Toolbar controls
     aren't activated when a target key is pressed. Must retain
     an instance of this so that the event listeners are not GCed"""
-    def __init__(self, canvas, target_key):
+    def __init__(self, canvas, target_keys):
         self.canvas = canvas
         self.former_state = None
-        self.target_key = target_key
+        self.target_keys = target_keys
         self.target_key_down = False
 
         self.canvas.mpl_connect('key_press_event', self.on_key_down)
@@ -34,11 +34,11 @@ class NavBarPatcher:
         NavigationToolbar2.drag_zoom = make_patch(self, BASE_DRAG_ZOOM)
 
     def on_key_down(self, event):
-        if event.key == self.target_key:
+        if event.key in self.target_keys:
             self.target_key_down = True 
 
     def on_key_up(self, event):
-        if event.key == self.target_key:
+        if event.key in self.target_keys:
             self.target_key_down = False
 
 def make_patch(patcher, function):
